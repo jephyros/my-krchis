@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 	
 	
-	@GetMapping("")
-	public String join() {
-		
+	@GetMapping("/")
+	public String homeindex() {		
 		return "index";
 	}
 }
