@@ -35,6 +35,7 @@ public class UserController {
 		return "/user/form";
 	}
 	
+	
 	@PostMapping("")
 	public String join(User user) {
 
@@ -56,6 +57,7 @@ public class UserController {
 	public String login(String userId,String password, HttpSession session) {
 		User user = userRepository.findByUserId(userId);
 		
+		
 		if (user == null) {
 			return "redirect:/users/loginForm";
 		}
@@ -67,6 +69,12 @@ public class UserController {
 		
 		return "redirect:/";
 	}
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("user");
+		return "redirect:/";
+	}
+	
 	@GetMapping("")
 	public String userList(Model model) {
 

@@ -12,9 +12,6 @@ public class User {
 	@GeneratedValue
 	private Long id;
 	
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	@Column(nullable=false, length=20)
 	private String userId;	
@@ -30,10 +27,15 @@ public class User {
 		return "User [id=" + id + ", userId=" + userId + ", password=" + password + ", name=" + name + ", email="
 				+ email + "]";
 	}
-
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	
 	public String getPassword() {
 		return password;
 	}
