@@ -71,3 +71,4 @@ my-krchis.iml
 .idea/encodings.xml
 .idea/compiler.xml
 target/classes/net/krchis/join/reposiory/UserRepository.class
+target/
