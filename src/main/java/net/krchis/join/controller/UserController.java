@@ -45,14 +45,7 @@ public class UserController {
 		return "redirect:/users";
 	}
 	
-	@PutMapping("")
-	public String updateUser(User user) {
-
-		// users.add(user);
-		userRepository.save(user);
-
-		return "redirect:/users";
-	}
+	
 	@PostMapping("/login")
 	public String login(String userId,String password, HttpSession session) {
 		User user = userRepository.findByUserId(userId);
@@ -86,9 +79,17 @@ public class UserController {
 	@GetMapping("/{id}/form")
 	public String updateForm(@PathVariable Long id, Model model) {
 
-		model.addAttribute("user", userRepository.findOne(id));
+		model.addAttribute("users", userRepository.findOne(id));
 
 		return "/user/updateForm";
+	}
+	@PutMapping("")
+	public String updateUser(User user) {
+
+		// users.add(user);
+		userRepository.save(user);
+
+		return "redirect:/users";
 	}
 
 	
