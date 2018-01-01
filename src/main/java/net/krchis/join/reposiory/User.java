@@ -45,8 +45,13 @@ public class User {
 		this.userId = userId;
 	}
 	
-	public String getPassword() {
-		return password;
+	
+	public boolean matchPassword(String newPassword) {
+		if (newPassword == null) {
+			return false;
+		}
+		
+		return newPassword.equals(password);
 	}
 	
 	public void setPassword(String password) {
