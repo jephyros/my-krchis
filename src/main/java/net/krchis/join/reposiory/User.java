@@ -13,7 +13,7 @@ public class User {
 	private Long id;
 	
 
-	@Column(nullable=false, length=20)
+	@Column(nullable=false, length=20, unique=true)
 	private String userId;	
 	
 	private String password;
@@ -21,11 +21,20 @@ public class User {
 	private String email;
 	
 	
-	
+	public void updateUser(User user) {
+		this.password = user.password;
+		this.name = user.name;
+		this.email = user.email;
+		
+		
+	}
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", userId=" + userId + ", password=" + password + ", name=" + name + ", email="
 				+ email + "]";
+	}
+	public Long getId() {
+		return id;
 	}
 	
 	public void setId(Long id) {
