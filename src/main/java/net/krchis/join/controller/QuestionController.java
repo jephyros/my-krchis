@@ -44,9 +44,20 @@ public class QuestionController {
 
 		return "redirect:/";
 	}
-
+    
+	//글보기
 	@GetMapping("/{id}")
 	public String show(@PathVariable Long id, Model model, HttpSession session) {
+		
+			
+		model.addAttribute("question", questionRepository.findOne(id));
+		return "/qna/show";
+	}
+	
+	//글수정폼
+	@GetMapping("/{id}/form")
+	public String updateForm(@PathVariable Long id, Model model,HttpSession session) {
+		
 		if (!HttpSessionUtils.isLoginUser(session)) {
 			return "redirect:/users/loginForm";
 		}
@@ -56,17 +67,10 @@ public class QuestionController {
 			return "redirect:/users/loginForm";
 		}
 		
-
-		model.addAttribute("question", question);
-		return "/qna/show";
-	}
-
-	@GetMapping("/{id}/form")
-	public String updateForm(@PathVariable Long id, Model model) {
-		model.addAttribute("question", questionRepository.findOne(id));
+		model.addAttribute("question",question);
 		return "/qna/updateForm";
 	}
-
+	//글수정처리
 	@PutMapping("/{id}")
 	public String update(@PathVariable Long id, String title, String contents,HttpSession session) {
 		

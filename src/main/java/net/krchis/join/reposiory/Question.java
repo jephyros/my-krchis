@@ -65,6 +65,8 @@ public class Question {
 
 		return this.writer.equals(loginUser);
 	}
-
+	public int getAnswerscount() {
+		return this.answers.size();
+	}
 	
 }
