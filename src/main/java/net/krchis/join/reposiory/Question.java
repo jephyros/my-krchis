@@ -34,6 +34,11 @@ public class Question {
 	@Lob
 	@JsonProperty
 	private String contents;
+	
+	@Column(columnDefinition="integer default 0")
+	@JsonProperty	
+	private Integer countOfAnswer = 0;
+	
 	private LocalDateTime createDate;
 	
 	@OneToMany(mappedBy = "question")
@@ -66,13 +71,17 @@ public class Question {
 		this.contents = contents;
 
 	}
+	public void addAnswer() {
+		this.countOfAnswer += 1;
+	}
+	public void deleteAnswer() {
+		this.countOfAnswer -= 1;
+	}
+	
 
 	public boolean isSameWriter(User loginUser) {
 
 		return this.writer.equals(loginUser);
 	}
-	public int getAnswerscount() {
-		return this.answers.size();
-	}
-	
+
 }

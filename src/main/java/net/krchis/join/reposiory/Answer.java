@@ -68,4 +68,8 @@ public class Answer {
 		
 	}
 	
+	public void deleteCountQuestionAnswer() {
+		this.question.deleteAnswer();
+	}
+	
 }

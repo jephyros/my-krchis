@@ -34,7 +34,7 @@ public class ApiAnswerController {
 		User sessionedUser = HttpSessionUtils.getUserFromSession(session);
 		Question question = questionRepository.findOne(questionId);
 		Answer answer = new Answer(sessionedUser,question, contents);
-		
+		question.addAnswer();
 		
 		return answerRepository.save(answer);
 	}
@@ -49,8 +49,9 @@ public class ApiAnswerController {
 		if(!answer.isSamewriter(loginuser)) {
 			return Result.fail("자신의글만삭제할수있습니다..");
 		}
-		
+		answer.deleteCountQuestionAnswer();
 		answerRepository.delete(id);
+		
 		return Result.ok();
 	}
 
