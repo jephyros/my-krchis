@@ -94,8 +94,8 @@ public class UserController {
 
 		return "/user/updateForm";
 	}
-	@PutMapping("")
-	public String updateUser(User user,HttpSession session) {
+	@PutMapping("/{id}")
+	public String updateUser(@PathVariable Long id,User user,HttpSession session) {
 		
 		if (!HttpSessionUtils.isLoginUser(session)) {
 			return "redirect:/users/loginForm";
@@ -104,12 +104,12 @@ public class UserController {
 		User sessionedUser = HttpSessionUtils.getUserFromSession(session);		
 
 		// users.add(user);
-		if (!user.getId().equals(sessionedUser.getId())) {
+		if (!id.equals(sessionedUser.getId())) {
 			throw new IllegalStateException("You can't update the another user!");
 		}	
 		
 		
-		User updateUser = userRepository.findOne(user.getId());
+		User updateUser = userRepository.findOne(id);
 		updateUser.updateUser(user);
 				
 		userRepository.save(updateUser);
