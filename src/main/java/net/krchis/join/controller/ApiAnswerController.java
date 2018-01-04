@@ -3,6 +3,7 @@ package net.krchis.join.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import net.krchis.join.reposiory.Answer;
 import net.krchis.join.reposiory.AnswerRepository;
 import net.krchis.join.reposiory.Question;
 import net.krchis.join.reposiory.QuestionRepository;
+import net.krchis.join.reposiory.Result;
 import net.krchis.join.reposiory.User;
 
 @RestController
@@ -35,6 +37,21 @@ public class ApiAnswerController {
 		
 		
 		return answerRepository.save(answer);
+	}
+	
+	@DeleteMapping("/{id}")
+	public Result delete (@PathVariable Long questionId, @PathVariable Long id, HttpSession session) {
+		if(!HttpSessionUtils.isLoginUser(session)) {
+			return Result.fail("로그인이필요합니다.");
+		}
+		User loginuser= HttpSessionUtils.getUserFromSession(session);
+		Answer answer = answerRepository.findOne(id);
+		if(!answer.isSamewriter(loginuser)) {
+			return Result.fail("자신의글만삭제할수있습니다..");
+		}
+		
+		answerRepository.delete(id);
+		return Result.ok();
 	}
 
 }

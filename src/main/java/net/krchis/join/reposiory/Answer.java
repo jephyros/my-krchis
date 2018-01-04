@@ -62,5 +62,10 @@ public class Answer {
 		return "Answer [id=" + id + ", writer=" + writer + ", contents=" + contents + ", createDate=" + createDate
 				+ "]";
 	}
+	public Boolean isSamewriter(User loginuser) {
+		
+		return this.writer.equals(loginuser);
+		
+	}
 	
 }
